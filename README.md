@@ -8,7 +8,9 @@ OSV is a vulnerability database and triage infrastructure for open source projec
 
 
 ## How do I use this tool?
-`go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all  | ./stunning-tribble`
+1. `go install github.com/naveensrinivasan/stunning-tribble@latest`
+1. Navigate to your `go.mod` folder
+1. `go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all  | stunning-tribble`
 
 - If there aren't issues it would `exit` without an error. 
 - If it finds any Vulnerability it would print the vulernabilty and `exit` with 1.
@@ -17,15 +19,16 @@ OSV is a vulnerability database and triage infrastructure for open source projec
 
 Every time a PR comes in for updates to `go.mod`/`go.sum` this will help if there are any known OSV issues.
 
+
 ### How do I integrate in CI?
 
-### Does it handle `replace` directive?
+#### Does it handle `replace` directive?
 
 Yes, `go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all`
 
-### 
 
-### What is the input for this?
+
+#### What is the input for this?
 `go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all `
 <details>
 <summary>Here is an example of input that can be passed as stdin</summary>
@@ -319,7 +322,7 @@ sigs.k8s.io/yaml@v1.2.0_<nil>
 ```
 </details>  
 
-### What is the output when it fails?
+#### What is the output when it fails?
 It dumps the `osv` `json` result.
 <details>
 <summary>Here is an example of output</summary>
@@ -1077,3 +1080,7 @@ It dumps the `osv` `json` result.
 }
 ```
 </details>  
+
+#### Why not print the output in table format?
+
+The goal of this project is to have least amount of dependency, so that it does not have worry about `osv` on dependecies.
