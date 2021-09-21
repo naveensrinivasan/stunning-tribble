@@ -12,15 +12,15 @@ OSV is a vulnerability database and triage infrastructure for open source projec
 1. Navigate to your `go.mod` folder
 1. `go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all  | stunning-tribble`
 
-- If there aren't issues it would `exit` without an error. 
-- If it finds any Vulnerability it would print the vulernabilty and `exit` with 1.
+- If there aren't issues, it would `exit` without an error. 
+- If it finds any Vulnerability, it would print the vulnerability and `exit` with 1.
 
 ### Why build this?
 
-Every time a PR comes in for updates to `go.mod`/`go.sum` this will help if there are any known OSV issues.
+Every time a PR comes in for updates to `go.mod`/`go.su` will help with any known OSV issues.
 
 
-### How do I integrate in CI?
+### How do I integrate into CI?
 
 #### Does it handle `replace` directive?
 
@@ -327,760 +327,770 @@ It dumps the `osv` `json` result.
 <details>
 <summary>Here is an example of output</summary>
 
-```
+``` json
 {
-   "vulns":[
-      {
-         "id":"GO-2021-0089",
-         "package":{
-            "name":"github.com/buger/jsonparser",
-            "ecosystem":"Go"
-         },
-         "details":"Parsing malformed JSON which contain opening brackets, but not closing brackes,\nleads to an infinite loop. If operating on untrusted user input this can be\nused as a denial of service vector.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"0.0.0-20200321185410-91ac96899e49"
-               }
+  "osv": [
+    {
+      "vulns": [
+        {
+          "id": "GO-2021-0089",
+          "package": {
+            "name": "github.com/buger/jsonparser",
+            "ecosystem": "Go"
+          },
+          "details": "Parsing malformed JSON which contain opening brackets, but not closing brackes,\nleads to an infinite loop. If operating on untrusted user input this can be\nused as a denial of service vector.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "0.0.0-20200321185410-91ac96899e49"
+              }
             ]
-         },
-         "aliases":[
+          },
+          "aliases": [
             "CVE-2020-10675"
-         ],
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "findKeyStart"
+          ],
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "findKeyStart"
             ]
-         },
-         "database_specific":{
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0089.yaml",
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0089.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/buger/jsonparser/pull/192"
+              "type": "FIX",
+              "url": "https://github.com/buger/jsonparser/pull/192"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/buger/jsonparser/commit/91ac96899e492584984ded0c8f9a08f10b473717"
+              "type": "FIX",
+              "url": "https://github.com/buger/jsonparser/commit/91ac96899e492584984ded0c8f9a08f10b473717"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/buger/jsonparser/issues/188"
+              "type": "WEB",
+              "url": "https://github.com/buger/jsonparser/issues/188"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/buger/jsonparser",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"0.0.0-20200321185410-91ac96899e49"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "findKeyStart"
+              "package": {
+                "name": "github.com/buger/jsonparser",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "0.0.0-20200321185410-91ac96899e49"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0089.yaml",
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "findKeyStart"
+                ]
+              },
+              "database_specific": {
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0089.yaml",
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json"
+              }
             }
-         ]
-      },
-      {
-         "id":"GO-2021-0057",
-         "package":{
-            "name":"github.com/buger/jsonparser",
-            "ecosystem":"Go"
-         },
-         "details":"Due to improper bounds checking, maliciously crafted JSON objects\ncan cause an out-of-bounds panic. If parsing user input, this may\nbe used as a denial of service vector.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"1.1.1"
-               }
+          ]
+        },
+        {
+          "id": "GO-2021-0057",
+          "package": {
+            "name": "github.com/buger/jsonparser",
+            "ecosystem": "Go"
+          },
+          "details": "Due to improper bounds checking, maliciously crafted JSON objects\ncan cause an out-of-bounds panic. If parsing user input, this may\nbe used as a denial of service vector.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "1.1.1"
+              }
             ]
-         },
-         "aliases":[
+          },
+          "aliases": [
             "CVE-2020-35381"
-         ],
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "searchKeys"
+          ],
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "searchKeys"
             ]
-         },
-         "database_specific":{
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0057.yaml",
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0057.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/buger/jsonparser/pull/221"
+              "type": "FIX",
+              "url": "https://github.com/buger/jsonparser/pull/221"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/buger/jsonparser/commit/df3ea76ece10095374fd1c9a22a4fb85a44efc42"
+              "type": "FIX",
+              "url": "https://github.com/buger/jsonparser/commit/df3ea76ece10095374fd1c9a22a4fb85a44efc42"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/buger/jsonparser/issues/219"
+              "type": "WEB",
+              "url": "https://github.com/buger/jsonparser/issues/219"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/buger/jsonparser",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"1.1.1"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "searchKeys"
+              "package": {
+                "name": "github.com/buger/jsonparser",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.1.1"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json",
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0057.yaml"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "searchKeys"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/buger/jsonparser.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0057.yaml"
+              }
             }
-         ]
-      }
-   ]
-}{
-   "vulns":[
-      {
-         "id":"GO-2020-0017",
-         "package":{
-            "name":"github.com/dgrijalva/jwt-go",
-            "ecosystem":"Go"
-         },
-         "details":"If a JWT contains an audience claim with an array of strings, rather\nthan a single string, and `MapClaims.VerifyAudience` is called with\n`req` set to `false`, then audience verification will be bypassed,\nallowing an invalid set of audiences to be provided.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "introduced":"0.0.0-20150717181359-44718f8a89b0"
-               }
+          ]
+        }
+      ]
+    },
+    {
+      "vulns": [
+        {
+          "id": "GO-2020-0017",
+          "package": {
+            "name": "github.com/dgrijalva/jwt-go",
+            "ecosystem": "Go"
+          },
+          "details": "If a JWT contains an audience claim with an array of strings, rather\nthan a single string, and `MapClaims.VerifyAudience` is called with\n`req` set to `false`, then audience verification will be bypassed,\nallowing an invalid set of audiences to be provided.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "introduced": "0.0.0-20150717181359-44718f8a89b0"
+              }
             ]
-         },
-         "aliases":[
+          },
+          "aliases": [
             "CVE-2020-26160"
-         ],
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "MapClaims.VerifyAudience"
+          ],
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "MapClaims.VerifyAudience"
             ]
-         },
-         "database_specific":{
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/dgrijalva/jwt-go/v4.json",
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0017.yaml"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/dgrijalva/jwt-go/v4.json",
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0017.yaml"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/dgrijalva/jwt-go/commit/ec0a89a131e3e8567adcb21254a5cd20a70ea4ab"
+              "type": "FIX",
+              "url": "https://github.com/dgrijalva/jwt-go/commit/ec0a89a131e3e8567adcb21254a5cd20a70ea4ab"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/dgrijalva/jwt-go/issues/422"
+              "type": "WEB",
+              "url": "https://github.com/dgrijalva/jwt-go/issues/422"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/dgrijalva/jwt-go",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0.0.0-20150717181359-44718f8a89b0"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "MapClaims.VerifyAudience"
+              "package": {
+                "name": "github.com/dgrijalva/jwt-go",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0.0.0-20150717181359-44718f8a89b0"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0017.yaml",
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/dgrijalva/jwt-go/v4.json"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "MapClaims.VerifyAudience"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/dgrijalva/jwt-go/v4.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0017.yaml"
+              }
             },
             {
-               "package":{
-                  "name":"github.com/dgrijalva/jwt-go/v4",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"4.0.0-preview1"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "MapClaims.VerifyAudience"
+              "package": {
+                "name": "github.com/dgrijalva/jwt-go/v4",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "4.0.0-preview1"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/dgrijalva/jwt-go/v4.json",
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0017.yaml"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "MapClaims.VerifyAudience"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/dgrijalva/jwt-go/v4.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0017.yaml"
+              }
             }
-         ]
-      }
-   ]
-}{
-   "vulns":[
-      {
-         "id":"GO-2020-0020",
-         "package":{
-            "name":"github.com/gorilla/handlers",
-            "ecosystem":"Go"
-         },
-         "details":"Usage of the [`CORS`] handler may apply improper CORS headers, allowing\nthe requester to explicitly control the value of the Access-Control-Allow-Origin\nheader, which bypasses the expected behavior of the Same Origin Policy.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"1.3.0"
-               }
+          ]
+        }
+      ]
+    },
+    {
+      "vulns": [
+        {
+          "id": "GO-2020-0020",
+          "package": {
+            "name": "github.com/gorilla/handlers",
+            "ecosystem": "Go"
+          },
+          "details": "Usage of the [`CORS`] handler may apply improper CORS headers, allowing\nthe requester to explicitly control the value of the Access-Control-Allow-Origin\nheader, which bypasses the expected behavior of the Same Origin Policy.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "1.3.0"
+              }
             ]
-         },
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "cors.ServeHTTP"
+          },
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "cors.ServeHTTP"
             ]
-         },
-         "database_specific":{
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/gorilla/handlers.json",
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0020.yaml"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0020.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/gorilla/handlers.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/gorilla/handlers/pull/116"
+              "type": "FIX",
+              "url": "https://github.com/gorilla/handlers/pull/116"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/gorilla/handlers/commit/90663712d74cb411cbef281bc1e08c19d1a76145"
+              "type": "FIX",
+              "url": "https://github.com/gorilla/handlers/commit/90663712d74cb411cbef281bc1e08c19d1a76145"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/gorilla/handlers",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"1.3.0"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "cors.ServeHTTP"
+              "package": {
+                "name": "github.com/gorilla/handlers",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.3.0"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/gorilla/handlers.json",
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0020.yaml"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "cors.ServeHTTP"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/gorilla/handlers.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0020.yaml"
+              }
             }
-         ]
-      }
-   ]
-}{
-   "vulns":[
-      {
-         "id":"GO-2020-0008",
-         "package":{
-            "name":"github.com/miekg/dns",
-            "ecosystem":"Go"
-         },
-         "details":"DNS message transaction IDs are generated using [`math/rand`] which\nmakes them relatively predictable. This reduces the complexity\nof response spoofing attacks against DNS clients.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"1.1.25-0.20191211073109-8ebf2e419df7"
-               }
+          ]
+        }
+      ]
+    },
+    {
+      "vulns": [
+        {
+          "id": "GO-2020-0008",
+          "package": {
+            "name": "github.com/miekg/dns",
+            "ecosystem": "Go"
+          },
+          "details": "DNS message transaction IDs are generated using [`math/rand`] which\nmakes them relatively predictable. This reduces the complexity\nof response spoofing attacks against DNS clients.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "1.1.25-0.20191211073109-8ebf2e419df7"
+              }
             ]
-         },
-         "aliases":[
+          },
+          "aliases": [
             "CVE-2019-19794"
-         ],
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "id"
+          ],
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "id"
             ]
-         },
-         "database_specific":{
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/miekg/dns.json",
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0008.yaml"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0008.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/miekg/dns.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/miekg/dns/pull/1044"
+              "type": "FIX",
+              "url": "https://github.com/miekg/dns/pull/1044"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/miekg/dns/commit/8ebf2e419df7857ac8919baa05248789a8ffbf33"
+              "type": "FIX",
+              "url": "https://github.com/miekg/dns/commit/8ebf2e419df7857ac8919baa05248789a8ffbf33"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/miekg/dns/issues/1037"
+              "type": "WEB",
+              "url": "https://github.com/miekg/dns/issues/1037"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/miekg/dns/issues/1043"
+              "type": "WEB",
+              "url": "https://github.com/miekg/dns/issues/1043"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/miekg/dns",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"1.1.25-0.20191211073109-8ebf2e419df7"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "id"
+              "package": {
+                "name": "github.com/miekg/dns",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.1.25-0.20191211073109-8ebf2e419df7"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/miekg/dns.json",
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0008.yaml"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "id"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/miekg/dns.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0008.yaml"
+              }
             }
-         ]
-      }
-   ]
-}{
-   "vulns":[
-      {
-         "id":"GO-2020-0018",
-         "package":{
-            "name":"github.com/satori/go.uuid",
-            "ecosystem":"Go"
-         },
-         "details":"UUIDs generated using [`NewV1`] and [`NewV4`] may not read the expected\nnumber of random bytes. These UUIDs may contain a significantly smaller\namount of entropy than expected, possibly leading to collisions.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"1.2.1-0.20181016170032-d91630c85102"
-               }
+          ]
+        }
+      ]
+    },
+    {
+      "vulns": [
+        {
+          "id": "GO-2020-0018",
+          "package": {
+            "name": "github.com/satori/go.uuid",
+            "ecosystem": "Go"
+          },
+          "details": "UUIDs generated using [`NewV1`] and [`NewV4`] may not read the expected\nnumber of random bytes. These UUIDs may contain a significantly smaller\namount of entropy than expected, possibly leading to collisions.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "1.2.1-0.20181016170032-d91630c85102"
+              }
             ]
-         },
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "NewV4",
-               "rfc4122Generator.getClockSequence",
-               "rfc4122Generator.getHardwareAddr"
+          },
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "NewV4",
+              "rfc4122Generator.getClockSequence",
+              "rfc4122Generator.getHardwareAddr"
             ]
-         },
-         "database_specific":{
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/satori/go.uuid.json",
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0018.yaml"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0018.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/satori/go.uuid.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/satori/go.uuid/pull/75"
+              "type": "FIX",
+              "url": "https://github.com/satori/go.uuid/pull/75"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/satori/go.uuid/commit/d91630c8510268e75203009fe7daf2b8e1d60c45"
+              "type": "FIX",
+              "url": "https://github.com/satori/go.uuid/commit/d91630c8510268e75203009fe7daf2b8e1d60c45"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/satori/go.uuid/issues/73"
+              "type": "WEB",
+              "url": "https://github.com/satori/go.uuid/issues/73"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/satori/go.uuid",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"1.2.1-0.20181016170032-d91630c85102"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "NewV4",
-                     "rfc4122Generator.getClockSequence",
-                     "rfc4122Generator.getHardwareAddr"
+              "package": {
+                "name": "github.com/satori/go.uuid",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "1.2.1-0.20181016170032-d91630c85102"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0018.yaml",
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/satori/go.uuid.json"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "NewV4",
+                  "rfc4122Generator.getClockSequence",
+                  "rfc4122Generator.getHardwareAddr"
+                ]
+              },
+              "database_specific": {
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0018.yaml",
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/satori/go.uuid.json"
+              }
             }
-         ]
-      }
-   ]
-}{
-   "vulns":[
-      {
-         "id":"GO-2020-0016",
-         "package":{
-            "name":"github.com/ulikunitz/xz",
-            "ecosystem":"Go"
-         },
-         "details":"An attacker can construct a series of bytes such that calling\n[`Reader.Read`] on the bytes could cause an infinite loop. If\nparsing user supplied input, this may be used as a denial of\nservice vector.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"0.5.8"
-               }
+          ]
+        }
+      ]
+    },
+    {
+      "vulns": [
+        {
+          "id": "GO-2020-0016",
+          "package": {
+            "name": "github.com/ulikunitz/xz",
+            "ecosystem": "Go"
+          },
+          "details": "An attacker can construct a series of bytes such that calling\n[`Reader.Read`] on the bytes could cause an infinite loop. If\nparsing user supplied input, this may be used as a denial of\nservice vector.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "0.5.8"
+              }
             ]
-         },
-         "aliases":[
+          },
+          "aliases": [
             "CVE-2021-29482"
-         ],
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "readUvarint"
+          ],
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "readUvarint"
             ]
-         },
-         "database_specific":{
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0016.yaml",
-            "source":"https://storage.googleapis.com/go-vulndb/github.com/ulikunitz/xz.json"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0016.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/github.com/ulikunitz/xz.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/ulikunitz/xz/commit/69c6093c7b2397b923acf82cb378f55ab2652b9b"
+              "type": "FIX",
+              "url": "https://github.com/ulikunitz/xz/commit/69c6093c7b2397b923acf82cb378f55ab2652b9b"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/ulikunitz/xz/issues/35"
+              "type": "WEB",
+              "url": "https://github.com/ulikunitz/xz/issues/35"
             },
             {
-               "type":"WEB",
-               "url":"https://github.com/ulikunitz/xz/security/advisories/GHSA-25xm-hr59-7c27"
+              "type": "WEB",
+              "url": "https://github.com/ulikunitz/xz/security/advisories/GHSA-25xm-hr59-7c27"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"github.com/ulikunitz/xz",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"0.5.8"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "readUvarint"
+              "package": {
+                "name": "github.com/ulikunitz/xz",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "0.5.8"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0016.yaml",
-                  "source":"https://storage.googleapis.com/go-vulndb/github.com/ulikunitz/xz.json"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "readUvarint"
+                ]
+              },
+              "database_specific": {
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0016.yaml",
+                "source": "https://storage.googleapis.com/go-vulndb/github.com/ulikunitz/xz.json"
+              }
             }
-         ]
-      }
-   ]
-}{
-   "vulns":[
-      {
-         "id":"GO-2020-0036",
-         "package":{
-            "name":"gopkg.in/yaml.v2",
-            "ecosystem":"Go"
-         },
-         "details":"Due to unbounded aliasing, a crafted YAML file can cause consumption\nof significant system resources. If parsing user supplied input, this\nmay be used as a denial of service vector.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"2.2.8"
-               }
+          ]
+        }
+      ]
+    },
+    {
+      "vulns": [
+        {
+          "id": "GO-2020-0036",
+          "package": {
+            "name": "gopkg.in/yaml.v2",
+            "ecosystem": "Go"
+          },
+          "details": "Due to unbounded aliasing, a crafted YAML file can cause consumption\nof significant system resources. If parsing user supplied input, this\nmay be used as a denial of service vector.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "2.2.8"
+              }
             ]
-         },
-         "aliases":[
+          },
+          "aliases": [
             "CVE-2019-11254"
-         ],
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "yaml_parser_fetch_more_tokens"
+          ],
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "yaml_parser_fetch_more_tokens"
             ]
-         },
-         "database_specific":{
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0036.yaml",
-            "source":"https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0036.yaml",
+            "source": "https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/go-yaml/yaml/pull/555"
+              "type": "FIX",
+              "url": "https://github.com/go-yaml/yaml/pull/555"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/go-yaml/yaml/commit/53403b58ad1b561927d19068c655246f2db79d48"
+              "type": "FIX",
+              "url": "https://github.com/go-yaml/yaml/commit/53403b58ad1b561927d19068c655246f2db79d48"
             },
             {
-               "type":"WEB",
-               "url":"https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=18496"
+              "type": "WEB",
+              "url": "https://bugs.chromium.org/p/oss-fuzz/issues/detail?id=18496"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"gopkg.in/yaml.v2",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"2.2.8"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "yaml_parser_fetch_more_tokens"
+              "package": {
+                "name": "gopkg.in/yaml.v2",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.8"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "source":"https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json",
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0036.yaml"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "yaml_parser_fetch_more_tokens"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0036.yaml"
+              }
             },
             {
-               "package":{
-                  "name":"github.com/go-yaml/yaml",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "yaml_parser_fetch_more_tokens"
+              "package": {
+                "name": "github.com/go-yaml/yaml",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0036.yaml",
-                  "source":"https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "yaml_parser_fetch_more_tokens"
+                ]
+              },
+              "database_specific": {
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2020-0036.yaml",
+                "source": "https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
+              }
             }
-         ]
-      },
-      {
-         "id":"GO-2021-0061",
-         "package":{
-            "name":"gopkg.in/yaml.v2",
-            "ecosystem":"Go"
-         },
-         "details":"Due to unbounded alias chasing, a maliciously crafted YAML file\ncan cause the system to consume significant system resources. If\nparsing user input, this may be used as a denial of service vector.\n",
-         "affects":{
-            "ranges":[
-               {
-                  "type":"SEMVER",
-                  "fixed":"2.2.3"
-               }
+          ]
+        },
+        {
+          "id": "GO-2021-0061",
+          "package": {
+            "name": "gopkg.in/yaml.v2",
+            "ecosystem": "Go"
+          },
+          "details": "Due to unbounded alias chasing, a maliciously crafted YAML file\ncan cause the system to consume significant system resources. If\nparsing user input, this may be used as a denial of service vector.\n",
+          "affects": {
+            "ranges": [
+              {
+                "type": "SEMVER",
+                "fixed": "2.2.3"
+              }
             ]
-         },
-         "modified":"2021-04-14T12:00:00Z",
-         "published":"2021-04-14T12:00:00Z",
-         "ecosystem_specific":{
-            "symbols":[
-               "decoder.unmarshal"
+          },
+          "modified": "2021-04-14T12:00:00Z",
+          "published": "2021-04-14T12:00:00Z",
+          "ecosystem_specific": {
+            "symbols": [
+              "decoder.unmarshal"
             ]
-         },
-         "database_specific":{
-            "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0061.yaml",
-            "source":"https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
-         },
-         "references":[
+          },
+          "database_specific": {
+            "source": "https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json",
+            "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0061.yaml"
+          },
+          "references": [
             {
-               "type":"FIX",
-               "url":"https://github.com/go-yaml/yaml/pull/375"
+              "type": "FIX",
+              "url": "https://github.com/go-yaml/yaml/pull/375"
             },
             {
-               "type":"FIX",
-               "url":"https://github.com/go-yaml/yaml/commit/bb4e33bf68bf89cad44d386192cbed201f35b241"
+              "type": "FIX",
+              "url": "https://github.com/go-yaml/yaml/commit/bb4e33bf68bf89cad44d386192cbed201f35b241"
             }
-         ],
-         "affected":[
+          ],
+          "affected": [
             {
-               "package":{
-                  "name":"gopkg.in/yaml.v2",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        },
-                        {
-                           "fixed":"2.2.3"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "decoder.unmarshal"
+              "package": {
+                "name": "gopkg.in/yaml.v2",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    },
+                    {
+                      "fixed": "2.2.3"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0061.yaml",
-                  "source":"https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "decoder.unmarshal"
+                ]
+              },
+              "database_specific": {
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0061.yaml",
+                "source": "https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json"
+              }
             },
             {
-               "package":{
-                  "name":"github.com/go-yaml/yaml",
-                  "ecosystem":"Go"
-               },
-               "ranges":[
-                  {
-                     "type":"SEMVER",
-                     "events":[
-                        {
-                           "introduced":"0"
-                        }
-                     ]
-                  }
-               ],
-               "ecosystem_specific":{
-                  "symbols":[
-                     "decoder.unmarshal"
+              "package": {
+                "name": "github.com/go-yaml/yaml",
+                "ecosystem": "Go"
+              },
+              "ranges": [
+                {
+                  "type": "SEMVER",
+                  "events": [
+                    {
+                      "introduced": "0"
+                    }
                   ]
-               },
-               "database_specific":{
-                  "source":"https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json",
-                  "url":"https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0061.yaml"
-               }
+                }
+              ],
+              "ecosystem_specific": {
+                "symbols": [
+                  "decoder.unmarshal"
+                ]
+              },
+              "database_specific": {
+                "source": "https://storage.googleapis.com/go-vulndb/gopkg.in/yaml.v2.json",
+                "url": "https://go.googlesource.com/vulndb/+/refs/heads/master/reports/GO-2021-0061.yaml"
+              }
             }
-         ]
-      }
-   ]
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 </details>  
 
 #### Why not print the output in table format?
 
-The goal of this project is to have least amount of dependency, so that it does not have worry about `osv` on dependecies.
+This project aims to have the least amount of dependency to not worry about `osv` on dependencies.
