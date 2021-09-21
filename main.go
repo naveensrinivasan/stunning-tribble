@@ -18,19 +18,37 @@ func main() {
 	}
 	l := log.New(os.Stderr, "", 0)
 	d := log.New(os.Stdout, "", 0)
+	var sb strings.Builder
 	for _, dep := range getGoDeps(string(bytes)) {
 		vul, err := getOSV(dep)
 		if err != nil {
 			l.Println(err)
 		}
 		if vul != "" {
-			d.Println(vul)
-			fail = true
+			if fail == false {
+				sb.WriteString(`{ "osv":[`)
+				sb.WriteString("\n")
+				fail = true
+			}
+			sb.WriteString(vul)
+			sb.WriteString(",")
 		}
 	}
 	if fail {
+		s := strings.TrimSuffix(sb.String(), ",")
+		s = s + "\n]}"
+		d.Println(jsonPrettyPrint(s))
 		os.Exit(1)
 	}
+}
+
+func jsonPrettyPrint(in string) string {
+	var out bytes.Buffer
+	err := json.Indent(&out, []byte(in), "", "\t")
+	if err != nil {
+		return in
+	}
+	return out.String()
 }
 
 type Dep struct {
