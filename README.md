@@ -19,13 +19,17 @@ OSV is a vulnerability database and triage infrastructure for open source projec
 
 Every time a PR comes in for updates to `go.mod`/`go.su` will help with any known OSV issues.
 
+### I can't fix all of them. Can I ignore existing ones?
 
-### How do I integrate into CI?
+Yes, you can ignore existing ones by passing the ID via the command line as comma-separated. Here the tool will ignore `GO-2020-0018,GO-2020-0016`
+
+Example 
+`go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all   | stunning-tribble GO-2020-0018,GO-2020-0016`
+
 
 #### Does it handle `replace` directive?
 
 Yes, `go list -m -f '{{if not (or  .Main)}}{{.Path}}@{{.Version}}_{{.Replace}}{{end}}' all`
-
 
 
 #### What is the input for this?
@@ -1094,3 +1098,8 @@ It dumps the `osv` `json` result.
 #### Why not print the output in table format?
 
 This project aims to have the least amount of dependency to not worry about `osv` on dependencies.
+
+#### Why name this as stunning-tribble mean?
+
+GitHub generated the repository name. I am not good at naming things.
+
