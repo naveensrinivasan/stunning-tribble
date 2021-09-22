@@ -17,7 +17,7 @@ OSV is a vulnerability database and triage infrastructure for open source projec
 
 ### Why build this?
 
-Every time a PR comes in for updates to `go.mod`/`go.su` will help with any known OSV issues.
+Every time a PR comes in for updates to `go.mod`/`go.sum` will help with any known OSV issues.
 
 ### I can't fix all of them. Can I ignore existing ones?
 
