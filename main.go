@@ -18,9 +18,17 @@ func main() {
 	}
 	l := log.New(os.Stderr, "", 0)
 	d := log.New(os.Stdout, "", 0)
+	args := os.Args
+	ignoreList := make(map[string]bool)
+	if len(args) > 1 {
+		ignores := strings.Split(args[1], ",")
+		for _, item := range ignores {
+			ignoreList[item] = true
+		}
+	}
 	var sb strings.Builder
 	for _, dep := range getGoDeps(string(bytes)) {
-		vul, err := getOSV(dep)
+		vul, err := getOSV(dep, ignoreList)
 		if err != nil {
 			l.Println(err)
 		}
@@ -82,9 +90,12 @@ func getGoDeps(out string) []Dep {
 	return deps
 }
 
-func getOSV(d Dep) (string, error) {
+func getOSV(d Dep, ignore map[string]bool) (string, error) {
 	// curl -X POST -H "Content-Type: application/json"  -d '{"version":"3.2.1+incompatible", "package": {"name": "github.com/golang-jwt/jwt", "ecosystem": "Go"}}' "https://api.osv.dev/v1/query"
 
+	type Vulns struct {
+		ID string `json:"id"`
+	}
 	type Package struct {
 		Name      string `json:"name"`
 		Ecosystem string `json:"ecosystem"`
@@ -115,6 +126,19 @@ func getOSV(d Dep) (string, error) {
 		return "", err
 	}
 	defer resp.Body.Close()
+
+	decoder := json.NewDecoder(resp.Body)
+	var v Vulns
+	err = decoder.Decode(&v)
+	if err != nil {
+		return "", err
+	}
+	if len(ignore) > 0 {
+		// ignoring the Vuln
+		if _, ok := ignore[v.ID]; ok {
+			return "", nil
+		}
+	}
 
 	output, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
