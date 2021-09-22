@@ -8,6 +8,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"time"
 )
 
 func main() {
@@ -92,9 +93,57 @@ func getGoDeps(out string) []Dep {
 
 func getOSV(d Dep, ignore map[string]bool) (string, error) {
 	// curl -X POST -H "Content-Type: application/json"  -d '{"version":"3.2.1+incompatible", "package": {"name": "github.com/golang-jwt/jwt", "ecosystem": "Go"}}' "https://api.osv.dev/v1/query"
-
-	type Vulns struct {
-		ID string `json:"id"`
+	type osv struct {
+		Vulns []struct {
+			ID        string    `json:"id"`
+			Published time.Time `json:"published"`
+			Modified  time.Time `json:"modified"`
+			Withdrawn time.Time `json:"withdrawn"`
+			Aliases   []string  `json:"aliases"`
+			Related   []string  `json:"related"`
+			Package   struct {
+				Name      string `json:"name"`
+				Ecosystem string `json:"ecosystem"`
+				Purl      string `json:"purl"`
+			} `json:"package"`
+			Summary string `json:"summary"`
+			Details string `json:"details"`
+			Affects struct {
+				Ranges []struct {
+					Type       string `json:"type"`
+					Repo       string `json:"repo"`
+					Introduced string `json:"introduced"`
+					Fixed      string `json:"fixed"`
+				} `json:"ranges"`
+				Versions []string `json:"versions"`
+			} `json:"affects"`
+			Affected []struct {
+				Package struct {
+					Name      string `json:"name"`
+					Ecosystem string `json:"ecosystem"`
+					Purl      string `json:"purl"`
+				} `json:"package"`
+				Ranges []struct {
+					Type   string `json:"type"`
+					Repo   string `json:"repo"`
+					Events []struct {
+						Introduced string `json:"introduced"`
+						Fixed      string `json:"fixed"`
+						Limit      string `json:"limit"`
+					} `json:"events"`
+				} `json:"ranges"`
+				Versions          []string `json:"versions"`
+				Ecosystemspecific struct{} `json:"ecosystemSpecific"`
+				Databasespecific  struct{} `json:"databaseSpecific"`
+			} `json:"affected"`
+			References []struct {
+				Type string `json:"type"`
+				URL  string `json:"url"`
+			} `json:"references"`
+			Severity          string   `json:"severity"`
+			DatabaseSpecific  struct{} `json:"database_specific"`
+			EcosystemSpecific struct{} `json:"ecosystem_specific"`
+		} `json:"vulns"`
 	}
 	type Package struct {
 		Name      string `json:"name"`
@@ -128,24 +177,22 @@ func getOSV(d Dep, ignore map[string]bool) (string, error) {
 	defer resp.Body.Close()
 
 	decoder := json.NewDecoder(resp.Body)
-	var v Vulns
+	var v osv
 	err = decoder.Decode(&v)
 	if err != nil {
 		return "", err
 	}
-	if len(ignore) > 0 {
-		// ignoring the Vuln
-		if _, ok := ignore[v.ID]; ok {
+	for _, item := range v.Vulns {
+		if _, ok := ignore[item.ID]; ok {
 			return "", nil
 		}
 	}
-
-	output, err := ioutil.ReadAll(resp.Body)
+	if len(v.Vulns) == 0 {
+		return "", nil
+	}
+	result, err := json.Marshal(v)
 	if err != nil {
 		return "", err
 	}
-	if len(output) > 2 {
-		return string(output), nil
-	}
-	return "", nil
+	return string(result), nil
 }
