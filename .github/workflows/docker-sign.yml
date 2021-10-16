@@ -38,3 +38,11 @@ jobs:
       - name: Sign image
         run: |
           cosign sign ghcr.io/${{github.repository_owner}}/stunning-tribble:${{ github.sha }}
+      - name: Setup Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: ‘1.17'’
+      - name: Build with Go
+        run : |
+          go build .
+          cosign sign-blob ./stunning-tribble

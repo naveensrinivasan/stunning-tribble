@@ -34,7 +34,7 @@ func main() {
 			l.Println(err)
 		}
 		if vul != "" {
-			if fail == false {
+			if !fail {
 				sb.WriteString(`{ "osv":[`)
 				sb.WriteString("\n")
 				fail = true
