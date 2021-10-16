@@ -45,4 +45,6 @@ jobs:
       - name: Build with Go
         run : |
           go build .
-          cosign sign-blob ./stunning-tribble
+          cosign sign-blob ./stunning-tribble > sig.txt
+          cat sig.txt
+          cosign verify-blob -key cosign.pub -signature sig.txt ./stunning-tribble
