@@ -44,8 +44,9 @@ jobs:
           go-version: '1.17'
       - name: Build with Go
         run : |
-          go install -v github.com/sigstore/rekor/cmd/rekor-cli@latest
+          go install  github.com/sigstore/rekor/cmd/rekor-cli@latest
           go build .
           cosign sign-blob ./stunning-tribble 
           sha256sum ./stunning-tribble >checksum
+          export PATH=${PATH}:`go env GOPATH`/bin
           rekor search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
