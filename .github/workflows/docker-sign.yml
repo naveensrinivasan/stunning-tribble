@@ -50,4 +50,4 @@ jobs:
           go build .
           cosign sign-blob ./stunning-tribble 
           sha256sum ./stunning-tribble >checksum
-          /usr/local/bin/rekor search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
+          /usr/local/bin/rekor-cli search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
