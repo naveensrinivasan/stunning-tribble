@@ -25,7 +25,6 @@ jobs:
           password: ${{ github.token }}
       - name: Install Cosign
         uses: sigstore/cosign-installer@f700e6fbbab82f6897758a3af7a8dede4e308656 # v1.2.1
-      steps:
       - name: Set env vars
         run: |
       - name: Build and Push container images
