@@ -28,12 +28,10 @@ jobs:
       steps:
       - name: Set env vars
         run: |
-           export GOPATH=$HOME/go
-           export GOBIN=$(go env GOPATH)/bin
-           export PATH=$PATH:$GOPATH
-           export PATH=$PATH:$GOBIN
-           mkdir -p $GOPATH/pkg
-           mkdir -p $GOBIN
+             export GOPATH=$HOME/go
+             export GOBIN=$(go env GOPATH)/bin
+             export PATH=$PATH:$GOPATH
+             export PATH=$PATH:$GOBIN
       - name: Build and Push container images
         uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229 # v2.7.0
         with:
