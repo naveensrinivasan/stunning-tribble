@@ -54,4 +54,4 @@ jobs:
           /usr/local/bin/rekor-cli search --rekor_server https://rekor.sigstore.dev --sha sha256:${sum} | sed '1d' > uuid
           cat uuid
           u=`cat uuid`
-          rekor get --rekor_server https://rekor.sigstore.dev --uuid ${u}
+          /usr/local/bin/rekor-cli get --rekor_server https://rekor.sigstore.dev --uuid ${u}
