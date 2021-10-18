@@ -28,10 +28,6 @@ jobs:
       steps:
       - name: Set env vars
         run: |
-         export GOPATH=$HOME/go
-         export GOBIN=$(go env GOPATH)/bin
-         export PATH=$PATH:$GOPATH
-         export PATH=$PATH:$GOBIN
       - name: Build and Push container images
         uses: docker/build-push-action@a66e35b9cbcf4ad0ea91ffcaf7bbad63ad9e0229 # v2.7.0
         with:
@@ -55,4 +51,8 @@ jobs:
           go build .
           cosign sign-blob ./stunning-tribble 
           sha256sum ./stunning-tribble >checksum
+          export GOPATH=$HOME/go
+          export GOBIN=$(go env GOPATH)/bin
+          export PATH=$PATH:$GOPATH
+          export PATH=$PATH:$GOBIN
           rekor search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
