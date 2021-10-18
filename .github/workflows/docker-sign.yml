@@ -54,4 +54,4 @@ jobs:
           export GOBIN=$(go env GOPATH)/bin
           export PATH=$PATH:$GOPATH
           export PATH=$PATH:$GOBIN
-          rekor search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
+          ${GOBIN}/rekor search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
