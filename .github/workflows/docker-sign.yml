@@ -48,5 +48,8 @@ jobs:
           go build .
           cosign sign-blob ./stunning-tribble 
           sha256sum ./stunning-tribble >checksum
+          echo ${GOPATH}
+          echo ${GOROOT}
           export PATH=${PATH}:`go env GOPATH`/bin
+          echo ${PATH}
           rekor search --rekor_server https://rekor.sigstore.dev --sha sha256:<(cat checksum)
