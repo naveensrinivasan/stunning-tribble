@@ -1,9 +1,7 @@
 name: docker-sign-container
 on:
   push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
   workflow_dispatch:
 
 jobs:
@@ -46,12 +44,15 @@ jobs:
           go-version: '1.17'
       - name: Build with Go
         run : |
-          GOBIN=/usr/local/bin/ go install  github.com/sigstore/rekor/cmd/rekor-cli@latest
-          go build .
-          cosign sign-blob ./stunning-tribble 
-          sha256sum ./stunning-tribble >checksum
-          sum=`cat checksum`
-          /usr/local/bin/rekor-cli search --rekor_server https://rekor.sigstore.dev --sha sha256:${sum} | sed '1d' > uuid
-          cat uuid
-          u=`cat uuid`
-          /usr/local/bin/rekor-cli get --rekor_server https://rekor.sigstore.dev --uuid ${u}
+             make sign-binary
+      - name: Get version
+        id: vars
+        run: echo ::set-output name=version::$(cat ./public.crt)
+      - name: Test output
+        run: echo ${{ steps.vars.outputs.version }}
+      - name: Release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: stunning-tribble*
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
